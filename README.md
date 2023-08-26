@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.50.214
+IP 158.160.50.214
 
 Frontend https://ap-mesto.nomoredomainsicu.ru/
 
