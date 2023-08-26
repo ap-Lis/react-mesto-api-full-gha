@@ -118,6 +118,6 @@ class Api {
     }
 }
 
-const api = new Api({url: 'http://api.ap-mesto.nomoredomainsicu.ru/', token: localStorage.getItem('jwt')});
+const api = new Api({url: 'https://api.ap-mesto.nomoredomainsicu.ru/', token: localStorage.getItem('jwt')});
 
 export default api;
