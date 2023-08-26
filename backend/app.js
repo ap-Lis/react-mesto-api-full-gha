@@ -25,8 +25,6 @@ const limiter = rateLimit({
   max: 200,
 });
 
-app.use(limiter);
-
 app.use(helmet());
 
 app.use(corsHandler);
@@ -45,6 +43,8 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+app.use(limiter);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
