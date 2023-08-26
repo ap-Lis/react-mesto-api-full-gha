@@ -99,10 +99,7 @@ function App() {
       setInfoPopupOpen(true);
       navigate("/login");
     }).catch((err)=>{
-      setInfoIcon(cross);
-      setInfoText('Что-то пошло не так! Попробуйте ещё раз.');
-      setInfoPopupOpen(true);
-      console.log(err);
+      showErrorToolTip(err);
     });
   }
 
@@ -112,7 +109,16 @@ function App() {
       localStorage.setItem('jwt', res.token);
       setUserEmail(userInfo.email);
       navigate('/');
-    }).catch((err)=>{console.log(err);});
+    }).catch((err)=>{
+      showErrorToolTip(err);      
+    });
+  }
+
+  function showErrorToolTip(err) {
+    setInfoIcon(cross);
+    setInfoText('Что-то пошло не так! Попробуйте ещё раз.');
+    setInfoPopupOpen(true);
+    console.log(err);
   }
 
   function handleUpdateAvatar(currentUser) {
