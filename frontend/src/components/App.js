@@ -99,7 +99,7 @@ function App() {
       setInfoPopupOpen(true);
       navigate("/login");
     }).catch((err)=>{
-      showErrorToolTip(err);
+      showErrorToolTip(err, 'Что-то пошло не так! Попробуйте ещё раз.');
     });
   }
 
@@ -110,13 +110,13 @@ function App() {
       setUserEmail(userInfo.email);
       navigate('/');
     }).catch((err)=>{
-      showErrorToolTip(err);      
+      showErrorToolTip(err, 'Неправильное имя пользователя и/или пароль.');      
     });
   }
 
-  function showErrorToolTip(err) {
+  function showErrorToolTip(err, text) {
     setInfoIcon(cross);
-    setInfoText('Что-то пошло не так! Попробуйте ещё раз.');
+    setInfoText(text);
     setInfoPopupOpen(true);
     console.log(err);
   }
