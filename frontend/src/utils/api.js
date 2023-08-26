@@ -1,7 +1,7 @@
 class Api {
     constructor({url, token}) {
       this._url = url;
-      this._token = token;
+      this._token = `Bearer ${token}`;
     }
 
     _getOkOrNot(res) {
@@ -118,6 +118,6 @@ class Api {
     }
 }
 
-const api = new Api({url: 'https://api.ap-mesto.nomoredomainsicu.ru/', token: localStorage.getItem('jwt')});
+const api = new Api({url: 'http://localhost:3000/', token: localStorage.getItem('jwt')});
 
 export default api;
