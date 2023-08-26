@@ -13,7 +13,6 @@ const {
   login,
 } = require('./controllers/users');
 const errorHandler = require('./middlewares/error-handler');
-const limiterHandler = require('./middlewares/limiter');
 const corsHandler = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -25,7 +24,11 @@ app.use(corsHandler);
 
 app.use(helmet());
 
-app.use(limiterHandler);
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  message: 'Слишком много запросов с этого IP, попоробуйте повторить попытку через 15 минут.',
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -35,15 +38,6 @@ mongoose.connect(DB_URL, {
 });
 
 app.use(requestLogger);
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 200,
-  headers: true,
-  message: 'Слишком много запросов с этого IP, попоробуйте повторить попытку через 15 минут.',
-});
-
-app.use(limiter);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
