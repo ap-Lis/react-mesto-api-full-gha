@@ -30,6 +30,8 @@ mongoose.connect(DB_URL, {
   useNewUrlParser: true,
 });
 
+app.use(requestLogger);
+
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -51,8 +53,6 @@ app.post('/signup', celebrate({
     password: Joi.string().required().min(8),
   }),
 }), createUser);
-
-app.use(requestLogger);
 
 app.use(auth);
 app.use('/users', require('./routes/users'));
