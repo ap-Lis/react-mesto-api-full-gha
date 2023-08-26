@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.ap-mesto.nomoredomainsicu.ru';
+export const BASE_URL = 'http://localhost:3000';
 
 function getOkOrNot(res) {
     if (res.ok) {
