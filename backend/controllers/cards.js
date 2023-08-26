@@ -9,7 +9,7 @@ module.exports.getCards = (req, res, next) => {
   Card.find({}, { strictPopulate: false })
     .populate('owner')
     .populate('likes')
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.header('Access-Control-Allow-Origin', '*').send({ data: cards }))
     .catch(next);
 };
 
@@ -17,7 +17,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((cards) => cards.populate('owner'))
-    .then((cards) => res.status(SUCCESS_CODE).send({ data: cards }))
+    .then((cards) => res.header('Access-Control-Allow-Origin', '*').status(SUCCESS_CODE).send({ data: cards }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Получены некорректные данные'));
@@ -32,7 +32,7 @@ module.exports.deleteCard = (req, res, next) => {
     .orFail(new NotFoundError('Карточка не найдена'))
     .then((cards) => {
       if (cards.owner.toString() === req.user._id) {
-        return Card.findByIdAndDelete(req.params.id).then(() => res.send({ message: 'Пост удалён' }));
+        return Card.findByIdAndDelete(req.params.id).then(() => res.header('Access-Control-Allow-Origin', '*').send({ message: 'Пост удалён' }));
       }
       return next(new AccessError('Нет доступа'));
     })

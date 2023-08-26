@@ -118,6 +118,6 @@ class Api {
     }
 }
 
-const api = new Api({url: 'https://mesto.nomoreparties.co/v1/cohort-66/', token: '098239d2-f16f-4551-948e-985979822f3b'});
+const api = new Api({url: 'https://api.ap-mesto.nomoredomainsicu.ru', token: localStorage.getItem('jwt')});
 
 export default api;
