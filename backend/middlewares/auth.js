@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
   const token = authorization.replace('Bearer ', '');
   let payload;
   try {
-    payload = jwt.verify(token, NODE_ENV !== 'production' ? JWT_SECRET : 'a-man-a-plan-a-canal-panama');
+    payload = jwt.verify(token, NODE_ENV !== 'production' ? 'a-man-a-plan-a-canal-panama' : JWT_SECRET);
   } catch (err) {
     next(new UnauthorizedError('Ошибка проверки jwt токена'));
   }
