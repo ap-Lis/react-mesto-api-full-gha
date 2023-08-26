@@ -13,9 +13,7 @@ const {
   login,
 } = require('./controllers/users');
 const errorHandler = require('./middlewares/error-handler');
-const limiterHandler = require('./middlewares/limiter');
 const corsHandler = require('./middlewares/cors');
-
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
@@ -40,8 +38,6 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
-app.use(limiterHandler);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
