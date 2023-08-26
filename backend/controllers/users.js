@@ -91,7 +91,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
-    .then((user) => { res.send({ token: jwt.sign({ _id: user._id }, NODE_ENV !== 'production' ? JWT_SECRET : 'a-man-a-plan-a-canal-panama', { expiresIn: '7d' }) }); })
+    .then((user) => { res.send({ token: jwt.sign({ _id: user._id }, NODE_ENV !== 'production' ? 'a-man-a-plan-a-canal-panama' : JWT_SECRET, { expiresIn: '7d' }) }); })
     .catch(next);
 };
 
