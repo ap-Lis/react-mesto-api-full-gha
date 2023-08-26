@@ -29,8 +29,6 @@ app.use(helmet());
 
 app.use(corsHandler);
 
-app.use(limiter);
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -39,6 +37,8 @@ mongoose.connect(DB_URL, {
 });
 
 app.use(requestLogger);
+
+app.use(limiter);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
