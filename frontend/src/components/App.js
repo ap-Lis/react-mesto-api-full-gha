@@ -46,7 +46,7 @@ function App() {
         api.getInitialCards()])
         .then(([info, initialCards])=>{
           setCurrentUser(info);
-          setCards(initialCards);
+          setCards(initialCards.data);
         })
         .catch((err)=>{console.log(err);});
     }
@@ -75,8 +75,8 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    api.changeLikeCardStatus(card._id, !isLiked).then(({data}) => {
+      setCards((state) => state.map((c) => c._id === card._id ? data : c));
     }).catch((err)=>{console.log(err);});
   }
 
@@ -87,8 +87,8 @@ function App() {
   }
 
   function handleUpdateUser(currentUser) {
-    api.setUserInfo(currentUser).then((info)=>{
-      updateUserInfo(info);
+    api.setUserInfo(currentUser).then(({data})=>{
+      updateUserInfo(data);
     }).catch((err)=>{console.log(err);});
   }
 
@@ -116,8 +116,8 @@ function App() {
   }
 
   function handleUpdateAvatar(currentUser) {
-    api.updateAvatar(currentUser.avatar).then((info)=>{
-      updateUserInfo(info);
+    api.updateAvatar(currentUser.avatar).then(({data})=>{
+      updateUserInfo(data);
     }).catch((err)=>{console.log(err);});
   }
 
@@ -139,7 +139,7 @@ function App() {
     if (token){
       auth.checkToken(token).then((res) => {
         if (res) {
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
           setLoggedIn(true);
           navigate('/');
         }
