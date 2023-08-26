@@ -1,0 +1,12 @@
+.popup__window{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media screen and (max-width: 650px) {
+    .popup__window{
+        gap: 16px;
+    }
+}
