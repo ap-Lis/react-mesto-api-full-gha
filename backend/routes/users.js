@@ -8,9 +8,7 @@ const {
   updateUserAvatar,
 } = require('../controllers/users');
 const urlPattern = require('../utils/constants');
-const limiterHandler = require('../middlewares/limiter');
 
-router.use(limiterHandler);
 router.get('/', getUsers);
 router.get('/me', getCurrentUser);
 router.get('/:id', celebrate({

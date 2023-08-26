@@ -8,9 +8,7 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 const urlPattern = require('../utils/constants');
-const limiterHandler = require('../middlewares/limiter');
 
-router.use(limiterHandler);
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
